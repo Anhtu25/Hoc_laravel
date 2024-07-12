@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', function(){
     echo "Trang chủ";
 });
-
+Route::get('/admin',[UserController::class,"test"]);
 // Route::get('/list-user',[UserController::class,"showUser"]);
 
 // Route::get('/list-student',[SinhVienController::class,"thongTinSV"]);

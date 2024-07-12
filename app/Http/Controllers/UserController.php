@@ -38,7 +38,8 @@ class UserController extends Controller
     
     public function editUsers($idUser){
         $phongban = DB::table('phongban')->select('id','ten_donvi')->get();
-        return view('users/addUsers', compact("phongban"));
+        $user = DB::table('users')->where('id',$idUser)->first();
+        return view('users/editUsers', compact("phongban","user"));
     }
     public function updateUser(Request $req, $idUser){
         $data = [
@@ -59,6 +60,10 @@ class UserController extends Controller
         ->where('id', $idUser)
         ->delete();
         return redirect()->route('users.listUser');
+    }
+
+    public  function test() {
+        return view('admin.product.listProduct');
     }
 
     // function showUser()

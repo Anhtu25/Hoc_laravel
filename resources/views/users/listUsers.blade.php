@@ -37,7 +37,7 @@
                 <td>{{$value->phongban_id }}</td>
                 <td>{{$value->ten_donvi }}</td>
                 <td>
-                    <button class="btn"> <a href="">Sửa</a></button>
+                    <button class="btn"> <a href="{{route('users.editUsers', $value->id)}}">Sửa</a></button>
                     <button onclick="confirm('Bạn có muốn xóa không')"><a href="{{route('users.delUsers', $value->id)}}">Xóa</a></button>
                 </td>
                 

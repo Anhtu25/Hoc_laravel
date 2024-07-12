@@ -13,7 +13,7 @@
         <label for="">Category</label>
         <select name="category" id="" class="form-control">
             @foreach ($category as $value)
-                <option value="{{$value->id}}">{{$value->name}}</option>
+                <option value="{{$value->id}}">{{$value->name_category}}</option>
             @endforeach
         </select><br><br>
         <button class="btn btn-success">Chỉnh sửa</button>

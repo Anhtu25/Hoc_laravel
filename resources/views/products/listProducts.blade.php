@@ -1,9 +1,9 @@
-@extends('layout/layout')
+@extends('layout.layout')
 @section('content')
     <h2>List product</h2>
     <a href="{{ route('products.addProducts') }}"><button class="btn btn-primary m-2">Add</button></a>
     <form action="{{ route('products.search') }}" method="GET" class="d-flex">
-        <input class="form-control" type="search" value="{{ request()->input('query') }}">
+        <input class="form-control" type="search" name="nameSearch" value="">
         <button class="btn btn-primary" type="submit">Search</button>
     </form>
     <table class="table table-striped">
@@ -26,7 +26,7 @@
                 <td class="text-center">{{ $value->name }}</td>
                 <td class="text-center">{{ $value->price }}</td>
                 <td class="text-center">{{ $value->view }}</td>
-                <td class="text-center">{{ $value->category_id }}</td>
+                <td class="text-center">{{ $value->name_category }}</td>
                 <td class="text-center">{{ $value->create_at }}</td>
                 <td class="text-center">{{ $value->update_at }}</td>
                 <td>

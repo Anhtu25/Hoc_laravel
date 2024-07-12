@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function search(Request $request){
-        $query = $request->input('query');
+    public function search(Request $req){
+        $nameSearch = $req->input('nameSearch');
         $listProducts = DB::table('product')
             ->join('category', 'category.id', '=', 'product.category_id')
             ->select('product.id', 'product.name', 'product.price', 'product.view', 'product.category_id', 'product.create_at', 'product.update_at')
-            ->where('product.name', 'like', "%{$query}%")
+            ->where('product.name', 'like', "%{$nameSearch}%")
             ->orderBy('product.view', 'desc')
             ->get();
         return view('products/listProducts', compact('listProducts'));
@@ -23,7 +23,7 @@ class ProductController extends Controller
     public function listProducts(){
         $listProducts  = DB::table('product')
         ->join('category', 'category.id', '=', 'product.category_id')
-        ->select('product.id','product.name','product.price','product.view','product.category_id','product.create_at', 'product.update_at')
+        ->select('product.id','product.name','product.price','product.view','category.name_category','product.create_at', 'product.update_at')
         ->orderBy('product.view', 'desc')
         ->get();
         return view('products/listProducts', compact('listProducts'));
@@ -31,7 +31,7 @@ class ProductController extends Controller
 
     public function addProducts()
     {
-        $category = DB::table('category')->select('id','name')->get();
+        $category = DB::table('category')->select('id','name_category')->get();
         return view('products/addProducts', compact("category"));
     }
     public function storeProducts(Request $req){
@@ -49,7 +49,7 @@ class ProductController extends Controller
     }
 
     public function editProducts($idPro){
-        $category = DB::table('category')->select('id', 'name')->get();
+        $category = DB::table('category')->select('id', 'name_category')->get();
         $product = DB::table('product')->where('id',$idPro)->first();
         return view('products/editProducts', compact('category','product'));
     }
