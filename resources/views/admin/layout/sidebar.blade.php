@@ -5,7 +5,7 @@
                     <a href="#" class="list-group-item ">
                         Quản lý người dùng
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="{{ route('admin.products.listProducts') }}" class="list-group-item">
                         Quản lý sản phẩm
                     </a>
                     <a href="#" class="list-group-item ">
@@ -16,4 +16,3 @@
                     </a>
                 </div>
             </div>
-            <div class="col-9 offset-3 p-0 position-relative">

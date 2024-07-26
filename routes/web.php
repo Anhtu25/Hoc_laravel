@@ -1,9 +1,18 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SinhVienController;
+// use App\Http\Controllers\ProductController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SinhVienController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\AuthenticationController;
+
+Route::get('login',[AuthenticationController::class,'login'])->name('login');
+Route::post('login',[AuthenticationController::class,'postLogin'])->name('postLogin');
+Route::get('logout',[AuthenticationController::class,'logout'])->name('logout');
+Route::get('register',[AuthenticationController::class,'register'])->name('register');
+Route::post('post-register',[AuthenticationController::class,'postRegister'])->name('postRegister');
 
 // GET & POST => method HTTP
 Route::get('/', function(){
@@ -45,4 +54,13 @@ Route::get('/update-user',[UserController::class,"updateUser"]);
 // Route::get('/list-user/{id}/{name?}',[UserController::class,"getUser"]);
 
 
+
+Route::group(['prefix'=>'admin', 'as'=>'admin.', 'middleware'=>'checkAdmin'], function(){
+    Route::group(['prefix'=>'products', 'as'=>'products.'], function(){
+        Route::get('/',[ProductController::class,'listProducts'])->name('listProducts');
+        Route::get('add-product',[ProductController::class,'addProducts'])->name('addProducts');
+        Route::post('add-product',[ProductController::class,'addPostProducts'])->name('addPostProducts');
+        Route::delete('delete-product',[ProductController::class,'deleteProduct'])->name('deleteProduct');
+    });
+});
 
